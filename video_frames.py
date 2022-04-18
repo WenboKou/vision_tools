@@ -1,4 +1,5 @@
 import imageio
+import os
 import argparse
 
 parser = argparse.ArgumentParser(description='get frames of the video') # container to hold arguments
@@ -8,8 +9,9 @@ args = parser.parse_args()
 
 def get_frames(video_path, frame_path):
     video_reader = imageio.get_reader(video_path)
-    for frame in video_reader:
-        print(frame)
+    for idx, frame in enumerate(video_reader):
+        print(f'processing the {idx}th')
+        imageio.imsave(os.path.join(frame_path, f'{idx}.png'), frame)
 
 
 if __name__ == '__main__':
